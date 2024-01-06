@@ -1,6 +1,7 @@
-import 'package:cmflutter0/src/pages/home/home_page.dart';
+import 'package:cmflutter0/src/bloc/login_bloc.dart';
 import 'package:cmflutter0/src/pages/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'pages/login/login_page.dart';
 
@@ -9,10 +10,15 @@ class CMApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "CMApp",
-      routes: AppRoute.all,
-      home: LoginPage(),
+    final loginBloc = BlocProvider(create: (context) => LoginBloc());
+
+    return MultiBlocProvider(
+      providers: [loginBloc],
+      child: MaterialApp(
+        title: "CMApp",
+        routes: AppRoute.all,
+        home: LoginPage(),
+      ),
     );
   }
 }
